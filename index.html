@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101114">
+<meta name="description" content="Сам себе маркетолог — собери свою воронку продаж за 3 минуты.">
+<title>Сам себе маркетолог</title>
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#101114;--bg2:#17191e;--panel:rgba(255,255,255,.075);--panel-strong:rgba(255,255,255,.105);
+  --line:rgba(255,255,255,.14);--line-soft:rgba(255,255,255,.09);
+  --text:#f5f5f7;--muted:#a3a6af;--accent:#d7e4ff;--accent-ink:#10141c;
+  --green:#a9dfc9;--orange:#f2c39c;--radius:26px;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;min-width:320px;min-height:100vh;color:var(--text);background:
+radial-gradient(ellipse at 15% 0%,rgba(87,104,145,.20),transparent 42%),
+radial-gradient(ellipse at 100% 30%,rgba(96,119,126,.12),transparent 36%),
+linear-gradient(160deg,#111216 0%,#17191e 52%,#101114 100%);line-height:1.5}
+button{font:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:2px solid #d7e4ff;outline-offset:3px}
+button:disabled{opacity:.38;cursor:not-allowed}
+button, a{-webkit-tap-highlight-color:transparent}
+.app{width:min(100% - 32px,960px);margin:0 auto;padding:calc(18px + env(safe-area-inset-top)) 0 calc(36px + env(safe-area-inset-bottom))}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:42px}
+.brand{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.15em;font-weight:700;color:#e9ebf1}
+.brand-mark{width:30px;height:30px;border-radius:10px;background:linear-gradient(145deg,rgba(255,255,255,.25),rgba(255,255,255,.04));border:1px solid var(--line);display:grid;place-items:center;box-shadow:inset 0 1px rgba(255,255,255,.22)}
+.brand-mark svg{width:17px;height:17px}
+.top-note{font-size:12px;color:var(--muted)}
+.glass{background:linear-gradient(145deg,rgba(255,255,255,.105),rgba(255,255,255,.045));border:1px solid var(--line);box-shadow:0 22px 70px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.12);backdrop-filter:blur(22px) saturate(135%);-webkit-backdrop-filter:blur(22px) saturate(135%)}
+.hero{position:relative;overflow:hidden;border-radius:34px;padding:clamp(28px,7vw,72px);min-height:520px;display:flex;flex-direction:column;justify-content:center}
+.hero:before{content:"";position:absolute;width:390px;height:390px;right:-130px;top:-145px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(215,228,255,.18),rgba(123,151,198,.045) 48%,transparent 70%);pointer-events:none}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.035) 50%,transparent 65%);pointer-events:none}
+.eyebrow{font-size:11px;letter-spacing:.18em;font-weight:700;color:#c5d1e8;text-transform:uppercase;margin:0 0 22px}
+h1{font-size:clamp(40px,7.2vw,76px);line-height:1.02;letter-spacing:-.055em;font-weight:650;max-width:720px;margin:0}
+.hero-copy{font-size:clamp(16px,2vw,19px);color:#b9bdc7;max-width:500px;margin:24px 0 30px}
+.primary,.secondary,.ghost{border:0;min-height:52px;border-radius:17px;padding:0 22px;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:650;transition:transform .18s ease,background .18s ease,border-color .18s ease}
+.primary{background:linear-gradient(135deg,#f4f6fb,#cbd8ed);color:#171a21;box-shadow:0 8px 26px rgba(187,205,239,.14)}
+.primary:hover{transform:translateY(-1px);background:#fff}
+.secondary{background:rgba(255,255,255,.09);color:var(--text);border:1px solid var(--line)}
+.secondary:hover,.ghost:hover{background:rgba(255,255,255,.13)}
+.ghost{background:transparent;color:#c9cbd2;border:1px solid transparent;min-height:44px;padding:0 12px}
+.meta-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:25px;color:#a7abb5;font-size:12px}
+.meta-pill{border:1px solid var(--line-soft);background:rgba(255,255,255,.035);border-radius:999px;padding:7px 11px}
+.screen{animation:rise .35s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.quiz-wrap{max-width:700px;margin:0 auto}
+.quiz-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:13px;color:var(--muted);font-size:13px}
+.progress{height:4px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden;margin-bottom:28px}
+.progress-fill{height:100%;background:linear-gradient(90deg,#aebfdf,#f3f5fb);border-radius:99px;transition:width .3s ease}
+.question-card{padding:clamp(22px,5vw,42px);border-radius:30px}
+h2{font-size:clamp(28px,5vw,42px);letter-spacing:-.04em;line-height:1.12;font-weight:630;margin:0}
+.question-sub{color:var(--muted);margin:12px 0 26px;font-size:15px}
+.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.option{position:relative;text-align:left;display:flex;align-items:center;gap:13px;min-height:66px;padding:15px 16px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.045);color:var(--text);transition:background .18s,border-color .18s,transform .18s;min-width:0}
+.option:hover{background:rgba(255,255,255,.085);transform:translateY(-1px)}
+.option.selected{background:rgba(215,228,255,.13);border-color:rgba(215,228,255,.72);box-shadow:inset 0 0 0 1px rgba(215,228,255,.1)}
+.option-icon{width:34px;height:34px;flex:0 0 34px;display:grid;place-items:center;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.055);color:#dfe6f5}
+.option-label{font-size:15px;font-weight:560;overflow-wrap:anywhere}
+.option-desc{display:block;color:var(--muted);font-size:12px;font-weight:400;margin-top:3px;line-height:1.4}
+.option-check{margin-left:auto;flex:0 0 18px;width:18px;height:18px;border-radius:50%;border:1px solid rgba(255,255,255,.28);display:grid;place-items:center;color:#11151c;font-size:11px}
+.selected .option-check{background:#d7e4ff;border-color:#d7e4ff}
+.quiz-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:26px}
+.error{font-size:13px;color:#f1c0b8;min-height:20px;margin-top:12px}
+.loading{min-height:430px;border-radius:30px;padding:40px 22px;display:flex;align-items:center;justify-content:center;text-align:center;flex-direction:column}
+.orb{width:100px;height:100px;border-radius:32px;border:1px solid rgba(255,255,255,.23);background:linear-gradient(145deg,rgba(255,255,255,.2),rgba(255,255,255,.025));box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 20px 55px rgba(0,0,0,.25);position:relative;overflow:hidden;margin-bottom:28px;animation:float 2.3s ease-in-out infinite}
+.orb:before{content:"";position:absolute;inset:-40%;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.52) 48%,transparent 58%);transform:translateX(-65%);animation:shine 2s ease-in-out infinite}
+.orb:after{content:"";position:absolute;inset:23px;border-radius:20px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.035)}
+@keyframes shine{to{transform:translateX(65%)}}
+@keyframes float{50%{transform:translateY(-5px) rotate(2deg)}}
+.loading p{color:var(--muted);max-width:370px;margin:12px 0 0}
+.result-top{padding:clamp(24px,5vw,48px);border-radius:30px;overflow:hidden;position:relative}
+.result-top:after{content:"";position:absolute;width:320px;height:320px;right:-120px;bottom:-190px;border-radius:50%;background:radial-gradient(circle,rgba(197,214,250,.16),transparent 70%);pointer-events:none}
+.result-title{font-size:clamp(36px,6.5vw,64px);letter-spacing:-.055em;line-height:1.02;max-width:680px;margin:12px 0 18px}
+.result-description{max-width:650px;color:#c1c4cd;font-size:17px;margin:0 0 25px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:26px}
+.stat{border:1px solid var(--line-soft);background:rgba(255,255,255,.045);border-radius:17px;padding:14px;min-width:0}
+.stat-label{font-size:11px;color:var(--muted);display:block;margin-bottom:5px}
+.stat-value{font-size:14px;font-weight:600;overflow-wrap:anywhere}
+.result-nav{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 34px}
+.nav-chip{color:#d7d9e0;background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:999px;padding:9px 13px;font-size:12px;text-decoration:none}
+.nav-chip:hover{background:rgba(255,255,255,.1)}
+.section{margin:34px 0;scroll-margin-top:20px}
+.section-heading{display:flex;align-items:flex-start;gap:13px;margin-bottom:17px}
+.section-num{display:grid;place-items:center;width:36px;height:36px;border-radius:13px;background:rgba(255,255,255,.08);border:1px solid var(--line);color:#c8d7f3;font-size:12px;flex:0 0 36px}
+.section h2{font-size:clamp(25px,4vw,34px)}
+.section-intro{color:var(--muted);margin:10px 0 0;max-width:700px}
+.content-card{padding:clamp(19px,4vw,30px);border-radius:24px;margin-top:12px;min-width:0}
+.content-card h3{font-size:19px;letter-spacing:-.02em;margin:0 0 10px}
+.content-card p{color:#c5c7cf;margin:9px 0}
+.content-card p:last-child{margin-bottom:0}
+.route-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.route-card{padding:22px;border-radius:24px;min-width:0}
+.route-kicker{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#b8c8e5;font-weight:700}
+.route-card h3{font-size:21px;margin:10px 0 8px;letter-spacing:-.03em}
+.route-card p{color:var(--muted);font-size:14px;margin:0 0 16px}
+.route-card ul{padding-left:18px;color:#d4d6dd;font-size:14px;margin:0}
+.route-card li{margin:8px 0}
+.flow{display:grid;grid-template-columns:1fr;gap:8px;max-width:590px;margin:0 auto}
+.flow-step{padding:14px 16px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.06);text-align:center;font-size:14px}
+.flow-step:nth-child(3){background:rgba(215,228,255,.12);border-color:rgba(215,228,255,.27)}
+.flow-step:last-child{background:rgba(169,223,201,.12);border-color:rgba(169,223,201,.25)}
+.flow-arrow{text-align:center;color:#777f8f;font-size:17px;line-height:1}
+.steps{display:grid;gap:10px}
+.step-row{display:grid;grid-template-columns:36px minmax(0,1fr);gap:13px;padding:17px;border:1px solid var(--line-soft);border-radius:18px;background:rgba(255,255,255,.035)}
+.step-number{width:32px;height:32px;display:grid;place-items:center;border-radius:11px;background:rgba(215,228,255,.12);color:#d7e4ff;font-weight:650;font-size:13px}
+.step-row h3{font-size:16px;margin:2px 0 5px}
+.step-row p{font-size:14px;color:var(--muted);margin:0}
+.message-card{padding:20px;border-radius:20px;margin-top:12px;border:1px solid var(--line);background:rgba(255,255,255,.045)}
+.message-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.message-top strong{font-size:14px}
+.copy-btn{border:1px solid var(--line);background:rgba(255,255,255,.06);color:#e7e9ee;border-radius:12px;padding:9px 12px;min-height:40px;font-size:12px;white-space:nowrap}
+.copy-btn:hover{background:rgba(255,255,255,.12)}
+.copy-text{white-space:pre-wrap;overflow-wrap:anywhere;color:#d0d2da;font-size:14px;line-height:1.65;user-select:text}
+.offer-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.offer{border:1px solid var(--line);background:rgba(255,255,255,.045);padding:21px;border-radius:21px}
+.offer-tag{font-size:11px;color:#b9c8e5;letter-spacing:.1em;text-transform:uppercase}
+.offer h3{margin:8px 0;font-size:18px}
+.offer p{font-size:14px;color:var(--muted);margin:0}
+.checklist{display:grid;gap:9px}
+.check-item{display:flex;align-items:flex-start;gap:12px;padding:15px;border:1px solid var(--line-soft);border-radius:16px;background:rgba(255,255,255,.035);cursor:pointer}
+.check-item input{appearance:none;flex:0 0 21px;width:21px;height:21px;margin:1px 0 0;border-radius:7px;border:1px solid rgba(255,255,255,.32);background:rgba(255,255,255,.04);display:grid;place-items:center}
+.check-item input:checked{background:#d7e4ff;border-color:#d7e4ff}
+.check-item input:checked:after{content:"✓";font-size:14px;color:#151820;font-weight:800}
+.check-text{font-size:14px;color:#d6d8df}
+.check-item:has(input:checked) .check-text{color:#858b97;text-decoration:line-through}
+.progress-note{color:var(--muted);font-size:12px;margin-top:12px}
+.callout{border:1px solid rgba(215,228,255,.2);background:rgba(215,228,255,.07);padding:20px;border-radius:20px}
+.callout strong{display:block;margin-bottom:7px}
+.callout p{margin:0;color:#c9cdd7;font-size:14px}
+.footer-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.footer{font-size:11px;color:#777c87;text-align:center;margin:34px 0 4px}
+.notice{padding:25px;border-radius:24px;text-align:left}
+.notice p{color:var(--muted)}
+.notice h2{font-size:28px}
+.hidden{display:none!important}
+@supports not ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){.glass{background:#202228}}
+@media(max-width:600px){
+ .app{width:calc(100% - 24px);padding-top:calc(12px + env(safe-area-inset-top))}
+ .topbar{margin-bottom:22px}.top-note{display:none}
+ .hero{min-height:min(690px,calc(100svh - 80px));padding:28px 23px;border-radius:27px}
+ .hero-copy{margin:19px 0 24px}
+ .options{grid-template-columns:1fr;gap:8px}
+ .option{min-height:60px;padding:12px 13px}
+ .question-card{border-radius:24px;padding:22px 17px}
+ .quiz-actions{margin-top:20px}.quiz-actions .primary{flex:1}
+ .stats{grid-template-columns:1fr;gap:8px}
+ .stat{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px}
+ .stat-label{margin:0}.stat-value{text-align:right}
+ .route-grid,.offer-grid{grid-template-columns:1fr}
+ .result-nav{gap:7px}.nav-chip{font-size:11px;padding:8px 10px}
+ .result-description{font-size:15px}
+ .result-top{border-radius:25px}
+ .message-top{align-items:flex-start}
+ .footer-actions{flex-direction:column}.footer-actions button{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 16.5 12 4l7 12.5H5Z" stroke="currentColor" stroke-width="1.5"/><path d="M8.3 16.5 12 10l3.7 6.5" stroke="currentColor" stroke-width="1.5"/></svg></span><span>САМ СЕБЕ МАРКЕТОЛОГ</span></div>
+    <div class="top-note">Практический конструктор воронки</div>
+  </header>
+  <main id="main">
+    <section id="home" class="hero glass screen">
+      <p class="eyebrow">Сам себе маркетолог</p>
+      <h1>Собери идеальную воронку с блога за 3 минуты</h1>
+      <p class="hero-copy">Ответь на 3 вопроса и получи пошаговый план привлечения клиентов под свой стиль работы.</p>
+      <div><button class="primary" id="startBtn">Старт <span aria-hidden="true">↗</span></button></div>
+      <div class="meta-row"><span class="meta-pill">3 вопроса</span><span class="meta-pill">3 минуты</span><span class="meta-pill">Готовый план действий</span></div>
+    </section>
+
+    <section id="quiz" class="quiz-wrap screen hidden" aria-live="polite">
+      <div class="quiz-head"><span id="stepLabel">Вопрос 1 из 3</span><button class="ghost" id="exitQuiz">На главную</button></div>
+      <div class="progress" aria-label="Прогресс прохождения"><div class="progress-fill" id="progressFill" style="width:33.33%"></div></div>
+      <div class="question-card glass">
+        <h2 id="questionTitle">Откуда хочешь получать заявки?</h2>
+        <p id="questionSub" class="question-sub">Выбери основную площадку для своей воронки.</p>
+        <div class="options" id="options"></div>
+        <div class="error" id="quizError" role="status"></div>
+        <div class="quiz-actions"><button class="ghost" id="backBtn">← Назад</button><button class="primary" id="nextBtn" disabled>Далее <span aria-hidden="true">→</span></button></div>
+      </div>
+    </section>
+
+    <section id="loading" class="loading glass screen hidden" aria-live="polite">
+      <div class="orb" aria-hidden="true"></div>
+      <h2>Собираем твою воронку</h2>
+      <p>Подготавливаем план действий под выбранную стратегию.</p>
+    </section>
+
+    <section id="result" class="screen hidden">
+      <div id="resultMount"></div>
+    </section>
+  </main>
+  <footer class="footer">Сам себе маркетолог · Практический инструмент для работы с блогом</footer>
+</div>
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const screens = ["home","quiz","loading","result"];
+  const state = {step:1, social:null, audience:null, strategy:null, loadingTimer:null, checks:{}};
+  const audienceOptions = {
+    Instagram:["0–499 подписчиков","500–999 подписчиков","1000–1999 подписчиков","2000+ подписчиков"],
+    Telegram:["0–99 подписчиков","100–249 подписчиков","250–499 подписчиков","500–749 подписчиков","750–1000 подписчиков","1000+ подписчиков"],
+    Threads:["0–99 подписчиков","100–249 подписчиков","250–499 подписчиков","500–749 подписчиков","750–1000 подписчиков","1000+ подписчиков"]
+  };
+  const strategies = [
+    {id:"aggressive",name:"Агрессивные продажи",desc:"Хочу быстро сделать рывок в доходе и готов активно работать с потенциальными клиентами",short:"Активные диалоги и быстрые продажи",goal:"Активно выводить заинтересованных людей к покупке",resource:"База и личные сообщения",tool:"Продающий созвон"},
+    {id:"two-weeks",name:"Клиенты за 2 недели",desc:"Хочу получать клиентов в сбалансированном темпе, без постоянной суеты",short:"Сбалансированный темп привлечения",goal:"Собрать последовательный путь от внимания до заявки",resource:"Контент и диалоги",tool:"Пошаговая система"},
+    {id:"long-term",name:"Никуда не спешу",desc:"Хочу построить фундаментальную воронку на долгосрочную перспективу",short:"Система на долгую перспективу",goal:"Построить устойчивую систему привлечения",resource:"Контент и доверие",tool:"Долгосрочная воронка"}
+  ];
+  const aggressiveContent = `
+    <div class="result-top glass">
+      <p class="eyebrow">Твоя воронка · Стратегия 01</p>
+      <h1 class="result-title">Агрессивные продажи</h1>
+      <p class="result-description">Стратегия для тех, кто хочет ускорить продажи и готов активно инициировать релевантные диалоги с потенциальными клиентами.</p>
+      <div class="flow" aria-label="Схема воронки">
+        <div class="flow-step">Существующая база или новый спрос</div><div class="flow-arrow">↓</div>
+        <div class="flow-step">Диалог в личных сообщениях</div><div class="flow-arrow">↓</div>
+        <div class="flow-step">Выявление задачи и квалификация</div><div class="flow-arrow">↓</div>
+        <div class="flow-step">Продающий созвон</div><div class="flow-arrow">↓</div>
+        <div class="flow-step">Предложение подходящего решения</div>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="stat-label">Цель</span><span class="stat-value">Ускорить продажи</span></div>
+        <div class="stat"><span class="stat-label">Основной ресурс</span><span class="stat-value">Активные диалоги</span></div>
+        <div class="stat"><span class="stat-label">Ключевой инструмент</span><span class="stat-value">Продающий созвон</span></div>
+      </div>
+    </div>
+    <nav class="result-nav" aria-label="Содержание результата">
+      <a class="nav-chip" href="#why">Кому подходит</a><a class="nav-chip" href="#routes">Два маршрута</a><a class="nav-chip" href="#offers">Офферы</a><a class="nav-chip" href="#scripts">Шаблоны</a><a class="nav-chip" href="#plan">План действий</a>
+    </nav>
+    <section class="section" id="why">
+      <div class="section-heading"><span class="section-num">01</span><div><h2>Когда выбирать эту стратегию</h2><p class="section-intro">Этот сценарий подойдёт, если ты хочешь сделать рывок в продажах и готов не только публиковать контент, но и самостоятельно начинать разговоры с потенциальными клиентами.</p></div></div>
+      <div class="content-card glass"><h3>Главный принцип</h3><p>Не ждать, пока каждый потенциальный клиент сам напишет, а находить уместные поводы для диалога, выяснять задачу человека и предлагать следующий шаг, если твоя услуга действительно ему подходит.</p><p>Активность не означает давление. Уважай отказ, не обещай гарантированный результат и не продолжай контакт, если человек попросил больше не писать.</p></div>
+    </section>
+    <section class="section" id="routes">
+      <div class="section-heading"><span class="section-num">02</span><div><h2>Выбери один из двух маршрутов</h2><p class="section-intro">Начни с того ресурса, который уже есть. Необязательно одновременно запускать обе механики.</p></div></div>
+      <div class="route-grid">
+        <article class="route-card glass"><span class="route-kicker">Маршрут № 1</span><h3>Монетизируй существующую базу</h3><p>Подходит, если у тебя уже были клиенты, заявки, консультации или содержательные диалоги с подписчиками.</p><ul><li>Прошлые клиенты, которым может быть актуальна следующая задача.</li><li>Люди, которые были на созвоне, но не купили.</li><li>Те, кто интересовался, но не дошёл до созвона.</li><li>Активные подписчики и другие релевантные контакты.</li></ul></article>
+        <article class="route-card glass"><span class="route-kicker">Маршрут № 2</span><h3>Создай новый спрос</h3><p>Подходит, если база небольшая, неактивная или ты только начинаешь собирать аудиторию потенциальных клиентов.</p><ul><li>Сформулируй конкретный оффер с понятной пользой.</li><li>Опубликуй его в своей социальной сети.</li><li>Пригласи заинтересованных людей в личные сообщения.</li><li>Уточни задачу и предложи подходящий следующий шаг.</li></ul></article>
+      </div>
+    </section>
+    <section class="section" id="route-one">
+      <div class="section-heading"><span class="section-num">03</span><div><h2>Маршрут № 1. Как реактивировать базу</h2><p class="section-intro">Сегментируй контакты по истории взаимодействия и пиши с учётом контекста. Не отправляй всем одно и то же сообщение.</p></div></div>
+      <div class="steps">
+        <div class="step-row"><span class="step-number">1</span><div><h3>Раздели контакты на группы</h3><p>Отдельно выпиши бывших клиентов, лидов после консультаций, людей с незавершённым диалогом и подписчиков, которые проявляли интерес к теме.</p></div></div>
+        <div class="step-row"><span class="step-number">2</span><div><h3>Начни с контекста, а не с продажи</h3><p>Напомни, о чём вы говорили, или задай уместный вопрос о текущей ситуации. Не делай вид, что помнишь детали, которых у тебя нет.</p></div></div>
+        <div class="step-row"><span class="step-number">3</span><div><h3>Выясни, актуальна ли задача</h3><p>Если человек отвечает, уточни, что изменилось, что уже пробовал и какой результат ему нужен.</p></div></div>
+        <div class="step-row"><span class="step-number">4</span><div><h3>Предложи созвон при наличии соответствия</h3><p>Объясни, зачем созвон нужен именно в этой ситуации. Если запрос можно решить коротким ответом, не усложняй путь.</p></div></div>
+      </div>
+      <div class="message-card"><div class="message-top"><strong>Пример сообщения старому лиду</strong><button class="copy-btn" data-copy="Привет! Мы раньше обсуждали [задачу]. Решил уточнить: этот вопрос для тебя ещё актуален или ты уже нашёл решение? Если актуален, могу задать пару вопросов и подсказать, какой следующий шаг имеет смысл.">Скопировать текст</button></div><div class="copy-text">Привет! Мы раньше обсуждали [задачу]. Решил уточнить: этот вопрос для тебя ещё актуален или ты уже нашёл решение? Если актуален, могу задать пару вопросов и подсказать, какой следующий шаг имеет смысл.</div></div>
+      <div class="message-card"><div class="message-top"><strong>Пример сообщения бывшему клиенту</strong><button class="copy-btn" data-copy="Привет! Как у тебя сейчас обстоят дела с [задачей, над которой работали]? Интересно, что уже получилось и где сейчас возникли сложности. Если есть новая задача, можем обсудить, чем я могу быть полезен.">Скопировать текст</button></div><div class="copy-text">Привет! Как у тебя сейчас обстоят дела с [задачей, над которой работали]? Интересно, что уже получилось и где сейчас возникли сложности. Если есть новая задача, можем обсудить, чем я могу быть полезен.</div></div>
+    </section>
+    <section class="section" id="route-two">
+      <div class="section-heading"><span class="section-num">04</span><div><h2>Маршрут № 2. Как создать новый спрос</h2><p class="section-intro">Предложи аудитории конкретную помощь, а не абстрактное «бесплатно проконсультирую». Чем понятнее результат, тем легче человеку решить, подходит ли ему предложение.</p></div></div>
+      <div class="content-card glass"><h3>Рабочая механика: разбор по переписке за отзыв</h3><p>Человек отвечает на короткий опрос и описывает задачу. Ты изучаешь вводные и даёшь персональную обратную связь текстом или голосовыми сообщениями. Итог — не набор общих советов, а документ с планом внедрения под конкретную ситуацию.</p><p>Созвон не обязателен на первом этапе. Если в процессе выясняется, что задача сложная и требует более глубокого разбора, можно предложить отдельную видеоконсультацию.</p></div>
+      <div class="offer-grid" id="offers">
+        <article class="offer"><span class="offer-tag">Оффер 01</span><h3>Готовое решение</h3><p>Мини-опрос, индивидуальная обратная связь, карта действий на 7 дней и записанный курс из трёх уроков.</p></article>
+        <article class="offer"><span class="offer-tag">Оффер 02</span><h3>Серия разборов</h3><p>Мини-опрос, персональная обратная связь, видеоконсультация для сложной задачи, карта действий на 15 дней и курс из пяти уроков.</p></article>
+      </div>
+      <div class="content-card glass"><h3>Какие задачи можно предложить разобрать</h3><p><strong>Упаковка профиля:</strong> что мешает посетителю понять, кому ты помогаешь и с чем к тебе обращаться.</p><p><strong>Воронка от подписчика до заявки:</strong> какие шаги должен пройти человек от первого касания до диалога.</p><p><strong>Аудит продаж и контента:</strong> что стоит усилить в сообщениях, публикациях и процессе продажи.</p><p><strong>Для серии разборов:</strong> объедини две конкретные задачи — одну, которую можно решить перепиской, и вторую, для которой нужен комплексный разбор.</p></div>
+      <div class="message-card"><div class="message-top"><strong>Пример публикации с оффером</strong><button class="copy-btn" data-copy="Хочу провести несколько персональных разборов для экспертов, которым сложно превращать подписчиков в заявки.\n\nТы отвечаешь на короткий опрос, я изучаю твою ситуацию и присылаю индивидуальный разбор с конкретными шагами внедрения. Без созвона: всё останется у тебя в переписке, чтобы можно было вернуться к рекомендациям.\n\nЕсли хочешь понять, что можно улучшить именно в твоём случае, напиши мне слово «РАЗБОР».">Скопировать текст</button></div><div class="copy-text">Хочу провести несколько персональных разборов для экспертов, которым сложно превращать подписчиков в заявки.
+
+Ты отвечаешь на короткий опрос, я изучаю твою ситуацию и присылаю индивидуальный разбор с конкретными шагами внедрения. Без созвона: всё останется у тебя в переписке, чтобы можно было вернуться к рекомендациям.
+
+Если хочешь понять, что можно улучшить именно в твоём случае, напиши мне слово «РАЗБОР».</div></div>
+    </section>
+    <section class="section" id="qualify">
+      <div class="section-heading"><span class="section-num">05</span><div><h2>Как вести диалог после отклика</h2><p class="section-intro">Задача переписки — понять запрос и определить подходящий следующий шаг, а не любой ценой довести каждого человека до созвона.</p></div></div>
+      <div class="steps">
+        <div class="step-row"><span class="step-number">1</span><div><h3>Уточни контекст</h3><p>Что человек продаёт, кому помогает и как сейчас получает заявки?</p></div></div>
+        <div class="step-row"><span class="step-number">2</span><div><h3>Определи главную сложность</h3><p>На каком этапе возникает проблема: внимание, диалог, квалификация или продажа?</p></div></div>
+        <div class="step-row"><span class="step-number">3</span><div><h3>Пойми приоритет и готовность</h3><p>Насколько задача актуальна сейчас и что человек уже готов предпринять для её решения?</p></div></div>
+        <div class="step-row"><span class="step-number">4</span><div><h3>Предложи следующий шаг</h3><p>Если задача подходит под твою услугу и требует глубокого обсуждения, объясни пользу созвона и предложи согласовать время.</p></div></div>
+      </div>
+      <div class="message-card"><div class="message-top"><strong>Пример перехода к созвону</strong><button class="copy-btn" data-copy="По тому, что ты описал, здесь есть несколько моментов, которые лучше рассмотреть вместе: [кратко обозначь задачу]. Предлагаю созвониться, разобрать текущую ситуацию и понять, какой вариант решения будет уместен. Если после разговора увидим, что я могу помочь, обсудим формат работы.">Скопировать текст</button></div><div class="copy-text">По тому, что ты описал, здесь есть несколько моментов, которые лучше рассмотреть вместе: [кратко обозначь задачу]. Предлагаю созвониться, разобрать текущую ситуацию и понять, какой вариант решения будет уместен. Если после разговора увидим, что я могу помочь, обсудим формат работы.</div></div>
+    </section>
+    <section class="section" id="scripts">
+      <div class="section-heading"><span class="section-num">06</span><div><h2>Что должно входить в результат разбора</h2><p class="section-intro">Ценность оффера — в применимости. Человек должен понимать, что делать дальше и как внедрить рекомендации в своей ситуации.</p></div></div>
+      <div class="steps">
+        <div class="step-row"><span class="step-number">01</span><div><h3>Короткий опрос</h3><p>Собери исходные данные: ниша, предложение, аудитория, текущая воронка и главная задача.</p></div></div>
+        <div class="step-row"><span class="step-number">02</span><div><h3>Персональная обратная связь</h3><p>Объясни, что именно стоит изменить и почему. Используй текст или голосовые сообщения.</p></div></div>
+        <div class="step-row"><span class="step-number">03</span><div><h3>Карта внедрения</h3><p>Оформи рекомендации в последовательный план действий на 7 или 15 дней в зависимости от формата разбора.</p></div></div>
+        <div class="step-row"><span class="step-number">04</span><div><h3>Дополнительные материалы</h3><p>Добавь подходящие уроки, которые помогают разобраться с внедрением. Они дополняют персональную рекомендацию, а не заменяют её.</p></div></div>
+      </div>
+    </section>
+    <section class="section" id="plan">
+      <div class="section-heading"><span class="section-num">07</span><div><h2>План внедрения</h2><p class="section-intro">Отмечай шаги по мере выполнения. Это локальный чек-лист текущего прохождения.</p></div></div>
+      <div class="content-card glass">
+        <div class="checklist" id="checklist">
+          <label class="check-item"><input type="checkbox"><span class="check-text">Определи, какой ресурс у тебя сильнее: существующая база или новый спрос.</span></label>
+          <label class="check-item"><input type="checkbox"><span class="check-text">Сегментируй релевантные контакты или сформулируй оффер для публикации.</span></label>
+          <label class="check-item"><input type="checkbox"><span class="check-text">Подготовь персональные сообщения и вопросы для уточнения задачи.</span></label>
+          <label class="check-item"><input type="checkbox"><span class="check-text">Начни диалоги или опубликуй оффер и ответь на отклики.</span></label>
+          <label class="check-item"><input type="checkbox"><span class="check-text">Квалифицируй запросы и предложи созвон тем, кому он действительно полезен.</span></label>
+          <label class="check-item"><input type="checkbox"><span class="check-text">Проанализируй, где люди отвечают, где теряют интерес и что стоит улучшить.</span></label>
+        </div>
+        <p class="progress-note" id="checkProgress">Выполнено: 0 из 6 шагов</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="callout"><strong>Запомни главное</strong><p>Агрессивные продажи — это активное инициирование контактов и последовательная работа с запросом клиента, а не навязчивость. Количество сообщений само по себе не гарантирует продажи: важны качество предложения, соответствие аудитории и то, насколько решение подходит конкретному человеку.</p></div>
+      <div class="footer-actions"><button class="primary" id="restartBtn">Пройти заново ↗</button><button class="secondary" id="backToQuestionsBtn">Изменить ответы</button></div>
+    </section>
+  `;
+  const twoWeeksContent = `
+    <div class="result-top glass"><p class="eyebrow">Твоя воронка · Стратегия 02</p><h1 class="result-title">Клиенты за 2 недели</h1><p class="result-description">Привлекай новую аудиторию через полезный материал, приглашай заинтересованных людей на трёхдневное мероприятие и переводи подходящих участников в персональные диалоги.</p>
+      <div class="flow"><div class="flow-step">Контент и оффер лид-магнита</div><div class="flow-arrow">↓</div><div class="flow-step">Выдача материала в личных сообщениях</div><div class="flow-arrow">↓</div><div class="flow-step">Приглашение в закрытый Telegram-канал</div><div class="flow-arrow">↓</div><div class="flow-step">3 дня: привлечение · упаковка · продажи</div><div class="flow-arrow">↓</div><div class="flow-step">Персональные диалоги и квалификация</div><div class="flow-arrow">↓</div><div class="flow-step">Подходящие клиенты → продающий созвон</div></div>
+      <div class="stats"><div class="stat"><span class="stat-label">Цель</span><span class="stat-value">Новые потенциальные клиенты</span></div><div class="stat"><span class="stat-label">Основной инструмент</span><span class="stat-value">Лид-магнит + мероприятие</span></div><div class="stat"><span class="stat-label">Горизонт</span><span class="stat-value">Цикл на 14 дней</span></div></div></div>
+    <nav class="result-nav"><a class="nav-chip" href="#tw-flow">Схема</a><a class="nav-chip" href="#tw-lead">Лид-магнит</a><a class="nav-chip" href="#tw-event">3 дня</a><a class="nav-chip" href="#tw-scripts">Шаблоны</a><a class="nav-chip" href="#tw-plan">Чек-лист</a></nav>
+    <section class="section" id="tw-flow"><div class="section-heading"><span class="section-num">01</span><div><h2>Как работает воронка</h2><p class="section-intro">Это короткий цикл кампании, а не гарантия продаж за 14 дней. Сроки можно сдвигать под темп набора аудитории.</p></div></div><div class="route-grid"><article class="route-card glass"><span class="route-kicker">Основной маршрут</span><h3>Привлечение новой аудитории</h3><ul><li>Публикуешь оффер с конкретным обещанием.</li><li>Выдаёшь материал тем, кто запросил его.</li><li>Приглашаешь заинтересованных на мероприятие.</li><li>После прогрева начинаешь персональные диалоги.</li></ul></article><article class="route-card glass"><span class="route-kicker">Дополнительный маршрут</span><h3>Выборочная работа с базой</h3><ul><li>Возвращаешься к релевантным прошлым контактам.</li><li>Начинаешь с контекста и вопроса об актуальности.</li><li>Не пишешь всем подряд и уважаешь отказ.</li><li>Предлагаешь созвон только при соответствии задачи.</li></ul></article></div></section>
+    <section class="section" id="tw-lead"><div class="section-heading"><span class="section-num">02</span><div><h2>Подготовь лид-магнит</h2><p class="section-intro">Материал должен решать одну конкретную задачу и быть связан с твоей платной услугой.</p></div></div><div class="content-card glass"><h3>Что можно предложить</h3><p>Мини-курс из пяти уроков, чек-лист, практическую инструкцию или серию коротких видео. Например: «5 уроков о том, как выстроить путь от подписчика до заявки».</p><p><strong>Формула оффера:</strong> проблема аудитории → конкретная польза → понятный формат → простой способ получения.</p><p>Подготовь кодовое слово, сценарий выдачи материала и следующий шаг — приглашение на трёхдневное мероприятие.</p></div>
+      <div class="message-card"><div class="message-top"><strong>Шаблон публикации с лид-магнитом</strong><button class="copy-btn" data-copy="Ты регулярно публикуешь контент, но заявок всё равно мало?\n\nВозможно, дело не в количестве публикаций, а в том, что не выстроен путь от первого интереса до покупки.\n\nЯ подготовил мини-курс из пяти уроков о том, как связать контент, привлечение потенциальных клиентов и продажи в единую систему.\n\nЧтобы получить курс, напиши мне слово «КУРС».">Скопировать текст</button></div><div class="copy-text">Ты регулярно публикуешь контент, но заявок всё равно мало?\n\nВозможно, дело не в количестве публикаций, а в том, что не выстроен путь от первого интереса до покупки.\n\nЯ подготовил мини-курс из пяти уроков о том, как связать контент, привлечение потенциальных клиентов и продажи в единую систему.\n\nЧтобы получить курс, напиши мне слово «КУРС».</div></div>
+      <div class="message-card"><div class="message-top"><strong>Сообщение при выдаче материала</strong><button class="copy-btn" data-copy="Привет! Отправляю обещанный мини-курс. Рекомендую начать с первого урока и по ходу отмечать, какие элементы у тебя уже работают, а какие требуют доработки. Если после просмотра появятся вопросы по твоей ситуации, можешь написать. ">Скопировать текст</button></div><div class="copy-text">Привет! Отправляю обещанный мини-курс. Рекомендую начать с первого урока и по ходу отмечать, какие элементы у тебя уже работают, а какие требуют доработки. Если после просмотра появятся вопросы по твоей ситуации, можешь написать.</div></div>
+    </section>
+    <section class="section" id="tw-event"><div class="section-heading"><span class="section-num">03</span><div><h2>Проведи трёхдневное мероприятие</h2><p class="section-intro">Каждый день сочетает полезный материал, пример, интерактив и понятный переход к следующей теме.</p></div></div><div class="route-grid"><article class="route-card glass"><span class="route-kicker">День 1</span><h3>Привлечение клиентов</h3><p>Покажи, как связать контент и оффер с конкретным действием аудитории.</p><ul><li>Разбор источников заявок.</li><li>Ошибки офферов.</li><li>Задание: найти слабое место в привлечении.</li></ul></article><article class="route-card glass"><span class="route-kicker">День 2</span><h3>Упаковка блога</h3><p>Помоги участникам понять, как профиль объясняет их ценность и кому они помогают.</p><ul><li>Позиционирование и ясность предложения.</li><li>Контент и демонстрация экспертности.</li><li>Задание: проверить профиль по критериям.</li></ul></article><article class="route-card glass"><span class="route-kicker">День 3</span><h3>Система продаж</h3><p>Разбери путь от интереса до покупки и покажи, где теряются потенциальные клиенты.</p><ul><li>Квалификация запроса.</li><li>Логика продающего диалога.</li><li>Задание: нарисовать карту воронки.</li></ul></article></div>
+      <div class="message-card"><div class="message-top"><strong>Приглашение на мероприятие</strong><button class="copy-btn" data-copy="Привет! Я готовлю бесплатное трёхдневное мероприятие для экспертов, которые хотят системнее получать клиентов из блога.\n\nЗа три дня разберём привлечение потенциальных клиентов, упаковку блога и путь от первого интереса до продажи. Будут практические задания, ответы на вопросы и разборы.\n\nВсё пройдёт в закрытом Telegram-канале. Хочешь присоединиться?">Скопировать текст</button></div><div class="copy-text">Привет! Я готовлю бесплатное трёхдневное мероприятие для экспертов, которые хотят системнее получать клиентов из блога.\n\nЗа три дня разберём привлечение потенциальных клиентов, упаковку блога и путь от первого интереса до продажи. Будут практические задания, ответы на вопросы и разборы.\n\nВсё пройдёт в закрытом Telegram-канале. Хочешь присоединиться?</div></div></section>
+    <section class="section" id="tw-scripts"><div class="section-heading"><span class="section-num">04</span><div><h2>Переведи интерес в диалог</h2><p class="section-intro">Пиши с опорой на реальную активность человека. Присутствие в канале само по себе не означает готовность покупать.</p></div></div><div class="content-card glass"><h3>Сначала квалифицируй запрос</h3><p>Выясни, какую задачу человек хочет решить, что уже пробовал, что мешает получить результат и насколько актуальна задача сейчас. Если запрос подходит под твою компетенцию и человеку нужна помощь, предложи созвон.</p></div>
+      <div class="message-card"><div class="message-top"><strong>Сообщение участнику после мероприятия</strong><button class="copy-btn" data-copy="Привет! На мероприятии ты затрагивал тему [тема/проблема]. Подскажи, что сейчас для тебя актуальнее: привлечь больше заявок, улучшить конверсию в покупку или выстроить систему с нуля?">Скопировать текст</button></div><div class="copy-text">Привет! На мероприятии ты затрагивал тему [тема/проблема]. Подскажи, что сейчас для тебя актуальнее: привлечь больше заявок, улучшить конверсию в покупку или выстроить систему с нуля?</div></div>
+      <div class="message-card"><div class="message-top"><strong>Переход к созвону</strong><button class="copy-btn" data-copy="Судя по тому, что ты описал, здесь стоит посмотреть, как устроен путь от первого интереса до заявки. Предлагаю разобрать твою ситуацию на созвоне: посмотрим, что уже работает и какие изменения стоит внедрить в первую очередь. Если формат подходит, расскажу, как проходит встреча.">Скопировать текст</button></div><div class="copy-text">Судя по тому, что ты описал, здесь стоит посмотреть, как устроен путь от первого интереса до заявки. Предлагаю разобрать твою ситуацию на созвоне: посмотрим, что уже работает и какие изменения стоит внедрить в первую очередь. Если формат подходит, расскажу, как проходит встреча.</div></div></section>
+    <section class="section" id="tw-plan"><div class="section-heading"><span class="section-num">05</span><div><h2>План на 14 дней</h2><p class="section-intro">Отмечай выполненные действия. Срок — ориентир для кампании, а не гарантия определённого числа продаж.</p></div></div><div class="content-card glass"><div class="checklist" id="checklist"><label class="check-item"><input type="checkbox"><span class="check-text">Дни 1–2: выбрать аудиторию, проблему и подготовить лид-магнит.</span></label><label class="check-item"><input type="checkbox"><span class="check-text">Дни 3–5: публиковать оффер и выдавать материал.</span></label><label class="check-item"><input type="checkbox"><span class="check-text">Дни 5–7: пригласить заинтересованных в канал и подготовить программу.</span></label><label class="check-item"><input type="checkbox"><span class="check-text">Дни 8–10: провести три занятия с заданиями и ответами на вопросы.</span></label><label class="check-item"><input type="checkbox"><span class="check-text">Дни 11–12: начать персональные диалоги и квалифицировать запросы.</span></label><label class="check-item"><input type="checkbox"><span class="check-text">Дни 13–14: провести созвоны и проанализировать конверсии.</span></label></div><p class="progress-note" id="checkProgress">Выполнено: 0 из 6 шагов</p></div></section>
+    <section class="section"><div class="callout"><strong>Запомни главное</strong><p>Воронка работает за счёт последовательности: полезный материал → мероприятие → персональный диалог → подходящий следующий шаг. Не обещай гарантированные продажи и не навязывай созвон тем, кому он не нужен.</p></div><div class="footer-actions"><button class="primary" id="restartBtn">Пройти заново ↗</button><button class="secondary" id="backToQuestionsBtn">Изменить ответы</button></div></section>`;
+
+  const longTermContent = `
+    <div class="result-top glass"><p class="eyebrow">Твоя воронка · Стратегия 03</p><h1 class="result-title">Никуда не спешу</h1><p class="result-description">Объедини активные продажи, привлечение новой аудитории и долгосрочный прогрев в единую систему, которая работает циклами, а не только во время запусков.</p>
+      <div class="flow"><div class="flow-step">Контент и несколько точек входа</div><div class="flow-arrow">↓</div><div class="flow-step">Лид-магниты, мини-курсы, разборы, эфиры и челленджи</div><div class="flow-arrow">↓</div><div class="flow-step">Прогрев и развитие отношений</div><div class="flow-arrow">↓</div><div class="flow-step">Выборочная работа с существующей базой</div><div class="flow-arrow">↓</div><div class="flow-step">Персональный диалог и квалификация</div><div class="flow-arrow">↓</div><div class="flow-step">Подходящее решение → созвон → продажа</div><div class="flow-arrow">↻</div><div class="flow-step">Анализ данных и улучшение следующего цикла</div></div>
+      <div class="stats"><div class="stat"><span class="stat-label">Цель</span><span class="stat-value">Устойчивая система</span></div><div class="stat"><span class="stat-label">Ресурсы</span><span class="stat-value">Контент + база + диалоги</span></div><div class="stat"><span class="stat-label">Ритм</span><span class="stat-value">Постоянные циклы</span></div></div></div>
+    <nav class="result-nav"><a class="nav-chip" href="#lt-system">Система</a><a class="nav-chip" href="#lt-tools">Конвертеры</a><a class="nav-chip" href="#lt-content">Контент</a><a class="nav-chip" href="#lt-sales">Продажи</a><a class="nav-chip" href="#lt-scripts">Шаблоны</a><a class="nav-chip" href="#lt-plan">Чек-лист</a></nav>
+    <section class="section" id="lt-system"><div class="section-heading"><span class="section-num">01</span><div><h2>Четыре контура одной системы</h2><p class="section-intro">Не нужно выбирать только один способ. Разные инструменты закрывают разные этапы пути клиента.</p></div></div><div class="route-grid"><article class="route-card glass"><span class="route-kicker">Контур 1</span><h3>Привлечение</h3><p>Контент и офферы приводят новых людей к конкретному действию: запросу материала, регистрации или участию.</p></article><article class="route-card glass"><span class="route-kicker">Контур 2</span><h3>Прогрев</h3><p>Мини-курсы, эфиры, разборы и полезные публикации помогают аудитории понять проблему и подход эксперта.</p></article><article class="route-card glass"><span class="route-kicker">Контур 3</span><h3>Активная работа с базой</h3><p>Релевантные контакты получают персональные сообщения с учётом истории взаимодействия и актуальности задачи.</p></article><article class="route-card glass"><span class="route-kicker">Контур 4</span><h3>Продажи и улучшение</h3><p>Квалификация, созвоны, предложения и анализ результатов превращают активности в измеримый процесс.</p></article></div></section>
+    <section class="section" id="lt-tools"><div class="section-heading"><span class="section-num">02</span><div><h2>Выбери конвертер под задачу</h2><p class="section-intro">Не запускай всё одновременно. Начни с одного основного формата и одного дополнительного, затем сравни качество контактов.</p></div></div><div class="route-grid"><article class="route-card glass"><span class="route-kicker">Персональная помощь</span><h3>Готовое решение</h3><p>Мини-опрос, индивидуальная обратная связь, карта внедрения на 7 дней и подходящие уроки. Подходит для конкретной задачи, которую можно диагностировать по вводным.</p></article><article class="route-card glass"><span class="route-kicker">Комплексная задача</span><h3>Серия разборов</h3><p>Обратная связь, видеоконсультация, карта внедрения на 15 дней и мини-курс из пяти уроков. Объединяй две связанные задачи, если одной переписки недостаточно.</p></article><article class="route-card glass"><span class="route-kicker">Масштабируемый формат</span><h3>Мини-курс или промпты</h3><p>Мини-курс помогает разобрать одну тему по шагам, а пакет промптов — выполнить конкретную задачу с помощью нейросети.</p></article><article class="route-card glass"><span class="route-kicker">Вовлечение</span><h3>Эфир или челлендж</h3><p>Эфир раскрывает тему и отвечает на вопросы. Челлендж помогает участникам пройти несколько практических шагов и получить микро-результат.</p></article></div><div class="content-card glass"><h3>Как выбрать формат</h3><p>Нужен масштабируемый вход — используй мини-курс. Нужно понять индивидуальную ситуацию — предложи разбор. Нужно помочь начать действовать — запускай челлендж. Нужно показать ход мысли и ответить на вопросы — проводи эфир.</p></div></section>
+    <section class="section" id="lt-content"><div class="section-heading"><span class="section-num">03</span><div><h2>Построй постоянный контентный цикл</h2><p class="section-intro">Контент должен не только информировать, но и помогать человеку переходить к следующему подходящему действию.</p></div></div><div class="steps"><div class="step-row"><span class="step-number">01</span><div><h3>Раскрывай проблему</h3><p>Объясняй, почему возникает трудность и какие ошибки мешают её решить.</p></div></div><div class="step-row"><span class="step-number">02</span><div><h3>Демонстрируй подход</h3><p>Публикуй примеры, разборы и объяснения, показывающие, как ты работаешь.</p></div></div><div class="step-row"><span class="step-number">03</span><div><h3>Предлагай конкретный шаг</h3><p>В зависимости от темы приглашай получить материал, прийти на эфир, пройти челлендж или обсудить задачу.</p></div></div></div><div class="content-card glass"><h3>Не каждая публикация должна продавать</h3><p>Важно сохранять полезность контента и регулярность. Конвертеры должны дополнять контентную систему, а не превращать каждое касание в призыв купить.</p></div></section>
+    <section class="section" id="lt-sales"><div class="section-heading"><span class="section-num">04</span><div><h2>Работай с базой и доводи до продажи</h2><p class="section-intro">Активные продажи — один из контуров долгосрочной системы. Используй их выборочно и по контексту.</p></div></div><div class="content-card glass"><h3>Сегменты для персональной работы</h3><p><strong>Прошлые клиенты:</strong> уточни, как идут дела и появилась ли новая задача.</p><p><strong>Лиды после созвонов:</strong> спроси, актуальна ли проблема и изменилось ли что-то с прошлого разговора.</p><p><strong>Люди с незавершённым диалогом:</strong> предложи вернуться к вопросу, если он всё ещё актуален.</p><p><strong>Активные подписчики и участники мероприятий:</strong> опирайся на реальные вопросы и проявленный интерес.</p><p>В диалоге выясни потребность, текущую ситуацию, препятствие и готовность действовать. Предлагай созвон только если задача подходит под твою услугу и человеку нужен такой формат.</p></div></section>
+    <section class="section" id="lt-scripts"><div class="section-heading"><span class="section-num">05</span><div><h2>Шаблоны сообщений</h2><p class="section-intro">Используй как основу, адаптируя под реальный контекст. Не отправляй сообщения массово без учёта интереса человека.</p></div></div>
+      <div class="message-card"><div class="message-top"><strong>Публикация с предложением материала</strong><button class="copy-btn" data-copy="Если ты [описание аудитории] и сейчас сталкиваешься с [конкретная проблема], я подготовил [материал/мини-курс], который поможет разобраться с [конкретный результат].\n\nЧтобы получить его, напиши мне слово «[КОДОВОЕ СЛОВО]».">Скопировать текст</button></div><div class="copy-text">Если ты [описание аудитории] и сейчас сталкиваешься с [конкретная проблема], я подготовил [материал/мини-курс], который поможет разобраться с [конкретный результат].\n\nЧтобы получить его, напиши мне слово «[КОДОВОЕ СЛОВО]».</div></div>
+      <div class="message-card"><div class="message-top"><strong>Возврат к прошлому контакту</strong><button class="copy-btn" data-copy="Привет! Мы раньше обсуждали [задачу]. Хотел уточнить, актуален ли этот вопрос сейчас или ты уже нашёл решение? Если актуален, можем коротко обсудить, какой следующий шаг будет полезен.">Скопировать текст</button></div><div class="copy-text">Привет! Мы раньше обсуждали [задачу]. Хотел уточнить, актуален ли этот вопрос сейчас или ты уже нашёл решение? Если актуален, можем коротко обсудить, какой следующий шаг будет полезен.</div></div>
+      <div class="message-card"><div class="message-top"><strong>Переход к персональному созвону</strong><button class="copy-btn" data-copy="По тому, что ты описал, стоит подробнее посмотреть на [конкретная задача]. Предлагаю разобрать твою ситуацию на созвоне, определить, что уже работает и какие изменения могут быть полезны. Если формат тебе подходит, расскажу, как проходит встреча.">Скопировать текст</button></div><div class="copy-text">По тому, что ты описал, стоит подробнее посмотреть на [конкретная задача]. Предлагаю разобрать твою ситуацию на созвоне, определить, что уже работает и какие изменения могут быть полезны. Если формат тебе подходит, расскажу, как проходит встреча.</div></div></section>
+    <section class="section" id="lt-plan"><div class="section-heading"><span class="section-num">06</span><div><h2>Чек-лист устойчивой системы</h2><p class="section-intro">Отмечай действия, которые уже встроены в твою регулярную работу.</p></div></div><div class="content-card glass"><div class="checklist" id="checklist"><label class="check-item"><input type="checkbox"><span class="check-text">Определи аудиторию, ключевые проблемы и основное платное предложение.</span></label><label class="check-item"><input type="checkbox"><span class="check-text">Подготовь один основной конвертер и один дополнительный формат.</span></label><label class="check-item"><input type="checkbox"><span class="check-text">Свяжи контент с понятными следующими действиями.</span></label><label class="check-item"><input type="checkbox"><span class="check-text">Настрой выдачу материалов и дальнейшее взаимодействие.</span></label><label class="check-item"><input type="checkbox"><span class="check-text">Сегментируй существующую базу и подготовь персональные сценарии.</span></label><label class="check-item"><input type="checkbox"><span class="check-text">Веди подходящих людей к диалогу и созвону без давления.</span></label><label class="check-item"><input type="checkbox"><span class="check-text">Фиксируй источник контакта, этап и результат взаимодействия.</span></label><label class="check-item"><input type="checkbox"><span class="check-text">Раз в неделю анализируй конверсии и улучшай слабые этапы.</span></label></div><p class="progress-note" id="checkProgress">Выполнено: 0 из 8 шагов</p></div></section>
+    <section class="section"><div class="callout"><strong>Запомни главное</strong><p>Не обязательно продавать всем сразу. Создай повторяемую систему: новые люди приходят, заинтересованные получают поводы двигаться дальше, а ты предлагаешь решение тем, кому действительно можешь помочь. Долгосрочная стратегия требует регулярности и анализа, а не бесконечного запуска новых инструментов.</p></div><div class="footer-actions"><button class="primary" id="restartBtn">Пройти заново ↗</button><button class="secondary" id="backToQuestionsBtn">Изменить ответы</button></div></section>`;
+  function showScreen(id){
+    screens.forEach(s=>$(s).classList.toggle("hidden",s!==id));
+    window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+  }
+  function currentStrategy(){return strategies.find(s=>s.id===state.strategy)}
+  function renderQuestion(){
+    const step=state.step;
+    $("stepLabel").textContent=`Вопрос ${step} из 3`;
+    $("progressFill").style.width=`${step/3*100}%`;
+    $("quizError").textContent="";
+    $("backBtn").style.visibility=step===1?"hidden":"visible";
+    $("nextBtn").textContent=step===3?"Собрать мою воронку ↗":"Далее →";
+    $("nextBtn").disabled=step===1?!state.social:step===2?!state.audience:!state.strategy;
+    let title,sub,items,selected;
+    if(step===1){
+      title="Откуда хочешь получать заявки?";sub="Выбери основную площадку для своей воронки.";
+      items=[{label:"Instagram",icon:"◎"},{label:"Telegram",icon:"↗"},{label:"Threads",icon:"@"}];selected=state.social;
+    }else if(step===2){
+      title="Сколько у тебя подписчиков в этой соцсети?";sub=`Выбери диапазон для площадки ${state.social||""}.`;
+      items=(audienceOptions[state.social]||[]).map(label=>({label,icon:"↗"}));selected=state.audience;
+    }else{
+      title="Какой стиль продаж тебе ближе?";sub="Выбери стратегию, которую хочешь получить в результате.";
+      items=strategies.map((s,i)=>({label:s.name,description:s.desc,icon:["↗","◷","⌁"][i]}));selected=state.strategy;
+    }
+    $("questionTitle").textContent=title;$("questionSub").textContent=sub;
+    const options=$("options");options.innerHTML="";
+    items.forEach(item=>{
+      const value=step===3?strategies.find(s=>s.name===item.label).id:item.label;
+      const btn=document.createElement("button");btn.type="button";btn.className="option"+(selected===value?" selected":"");
+      btn.setAttribute("aria-pressed",selected===value?"true":"false");
+      btn.innerHTML=`<span class="option-icon" aria-hidden="true">${item.icon}</span><span class="option-label">${item.label}${item.description?`<span class="option-desc">${item.description}</span>`:""}</span><span class="option-check" aria-hidden="true">${selected===value?"✓":""}</span>`;
+      btn.addEventListener("click",()=>{
+        if(step===1&&state.social!==value){state.social=value;state.audience=null}
+        else if(step===2)state.audience=value;
+        else state.strategy=value;
+        renderQuestion();
+      });
+      options.appendChild(btn);
+    });
+    $("nextBtn").disabled=step===1?!state.social:step===2?!state.audience:!state.strategy;
+  }
+  function beginQuiz(){clearTimeout(state.loadingTimer);state.step=1;state.social=null;state.audience=null;state.strategy=null;state.checks={};renderQuestion();showScreen("quiz")}
+  function next(){
+    if(state.step===1&&!state.social||state.step===2&&!state.audience||state.step===3&&!state.strategy){$("quizError").textContent="Выбери один из вариантов, чтобы продолжить.";return}
+    if(state.step<3){state.step++;renderQuestion()}else showLoading();
+  }
+  function showLoading(){
+    showScreen("loading");
+    clearTimeout(state.loadingTimer);
+    state.loadingTimer=setTimeout(()=>renderResult(),3900);
+  }
+  function renderResult(){
+    const strategy=currentStrategy();if(!strategy){showScreen("quiz");return}
+    if(strategy.id==="aggressive"){
+      $("resultMount").innerHTML=aggressiveContent;
+    }else if(strategy.id==="two-weeks"){
+      $("resultMount").innerHTML=twoWeeksContent;
+    }else{
+      $("resultMount").innerHTML=longTermContent;
+    }
+    bindCopyButtons();bindChecklist();
+    showScreen("result");
+    const restart=$("restartBtn");if(restart)restart.addEventListener("click",beginQuiz);
+    const back=$("backToQuestionsBtn");if(back)back.addEventListener("click",()=>{state.step=3;renderQuestion();showScreen("quiz")});
+  }
+  function bindCopyButtons(){
+    document.querySelectorAll("[data-copy]").forEach(btn=>btn.addEventListener("click",async()=>{
+      const text=btn.getAttribute("data-copy");
+      try{
+        if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);btn.textContent="Скопировано ✓"}
+        else{
+          const ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();
+          const ok=document.execCommand("copy");ta.remove();
+          if(ok)btn.textContent="Скопировано ✓";else{btn.textContent="Выдели текст вручную";btn.title="Выдели текст сообщения и скопируй его"}
+        }
+      }catch(e){btn.textContent="Выдели текст вручную";btn.title="Скопируй текст сообщения вручную"}
+      setTimeout(()=>btn.textContent="Скопировать текст",2200);
+    }));
+  }
+  function bindChecklist(){
+    const inputs=[...document.querySelectorAll("#checklist input")];
+    const update=()=>{const n=inputs.filter(i=>i.checked).length;$("checkProgress").textContent=`Выполнено: ${n} из ${inputs.length} шагов`};
+    inputs.forEach(i=>i.addEventListener("change",update));update();
+  }
+  function escapeHtml(str){return String(str).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+  $("startBtn").addEventListener("click",()=>{state.step=1;renderQuestion();showScreen("quiz")});
+  $("nextBtn").addEventListener("click",next);
+  $("backBtn").addEventListener("click",()=>{if(state.step>1){state.step--;renderQuestion()}});
+  $("exitQuiz").addEventListener("click",()=>{clearTimeout(state.loadingTimer);showScreen("home")});
+  $("restartBtn").addEventListener("click",beginQuiz);
+  $("backToQuestionsBtn").addEventListener("click",()=>{state.step=3;renderQuestion();showScreen("quiz")});
+})();
+</script>
+</body>
+</html>
